@@ -42,7 +42,7 @@ public class Main_2 extends ApplicationAdapter {
         player = gameObjectFactory.createGameObject(GameObjectType.PLAYER);
         moveUpCommand = new MoveUpCommand(player, 10);
         moveDownCommand = new MoveDownCommand(player, 10);
-        enemyManager.createEnemies(800, MathUtils.random(600 - 120));
+        enemyManager.createEnemies(0,800, 0,380);
 
     }
 
@@ -51,7 +51,7 @@ public class Main_2 extends ApplicationAdapter {
         enemyManager.moveEnemy(delta);
         enemyManager.deleteEnemies(player.getX(), player.getY(), 50);
         if (!enemyManager.isGameover()) {
-            enemyManager.createEnemies(800, MathUtils.random(600 - 120));
+            enemyManager.createEnemies(800,800, 0, 380);
         }
     }
 

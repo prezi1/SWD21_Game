@@ -37,7 +37,8 @@ public class Zombie implements GameObject {
 
     @Override
     public void printPosition(PositionOutput positionOutput) {
-        positionOutput.print(new CSVOutputter(), getX(),getY(),"C02");
+       // positionOutput.print(new CSVOutputter(), getX(),getY(),"C02");
+        positionOutput.print(getX(),getY(),this.getClass().getSimpleName());
     }
 
     @Override

@@ -38,11 +38,14 @@ public class Robot implements GameObject {
 
     @Override
     public void printPosition(PositionOutput positionOutput) {
+        /*
         if (getX() > 300) {
             positionOutput.print(new CSVOutputter(), getX(),getY());
         }else{
             positionOutput.print(new TextOuputter(), getX(), getY());
         }
+        */
+        positionOutput.print(getX(),getY(),this.getClass().getSimpleName());
     }
 
     @Override

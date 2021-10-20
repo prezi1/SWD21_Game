@@ -4,5 +4,4 @@ public interface Output {
 
     void print (float x, float y);
     void print (float x, float y, String prefix);
-
 }

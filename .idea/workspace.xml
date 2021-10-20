@@ -4,7 +4,17 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="a59d6f05-ed43-45c3-bf1b-c232caa47205" name="Default Changelist" comment="" />
+    <list default="true" id="a59d6f05-ed43-45c3-bf1b-c232caa47205" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/swdgame21-development/core/src/main/java/at/campus02/swd/game/Main_2.java" beforeDir="false" afterPath="$PROJECT_DIR$/swdgame21-development/core/src/main/java/at/campus02/swd/game/Main_2.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/swdgame21-development/core/src/main/java/at/campus02/swd/game/Outputter/Output.java" beforeDir="false" afterPath="$PROJECT_DIR$/swdgame21-development/core/src/main/java/at/campus02/swd/game/Outputter/Output.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/swdgame21-development/core/src/main/java/at/campus02/swd/game/Outputter/PositionOutput.java" beforeDir="false" afterPath="$PROJECT_DIR$/swdgame21-development/core/src/main/java/at/campus02/swd/game/Outputter/PositionOutput.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/swdgame21-development/core/src/main/java/at/campus02/swd/game/gameobjects/EnemyManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/swdgame21-development/core/src/main/java/at/campus02/swd/game/gameobjects/EnemyManager.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/swdgame21-development/core/src/main/java/at/campus02/swd/game/gameobjects/EnemyObject.java" beforeDir="false" afterPath="$PROJECT_DIR$/swdgame21-development/core/src/main/java/at/campus02/swd/game/gameobjects/EnemyObject.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/swdgame21-development/core/src/main/java/at/campus02/swd/game/gameobjects/Robot.java" beforeDir="false" afterPath="$PROJECT_DIR$/swdgame21-development/core/src/main/java/at/campus02/swd/game/gameobjects/Robot.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/swdgame21-development/core/src/main/java/at/campus02/swd/game/gameobjects/Zombie.java" beforeDir="false" afterPath="$PROJECT_DIR$/swdgame21-development/core/src/main/java/at/campus02/swd/game/gameobjects/Zombie.java" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -40,6 +50,9 @@
       </list>
     </option>
   </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
   <component name="GitSEFilterConfiguration">
     <file-type-list>
       <filtered-out-file-type name="LOCAL_BRANCH" />
@@ -56,6 +69,7 @@
   <component name="PropertiesComponent">
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
+    <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$/swdgame21-development/core/src/main/java/at/campus02/swd/game" />
@@ -82,17 +96,6 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration default="true" type="ArquillianJUnit" factoryName="" nameIsGenerated="true">
-      <option name="arquillianRunConfiguration">
-        <value>
-          <option name="containerStateName" value="" />
-        </value>
-      </option>
-      <option name="TEST_OBJECT" value="class" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
     <recent_temporary>
       <list>
         <item itemvalue="Application.Lwjgl3Launcher" />
@@ -112,10 +115,33 @@
       <workItem from="1634571674910" duration="16513000" />
       <workItem from="1634630320465" duration="17196000" />
       <workItem from="1634714881536" duration="4365000" />
+      <workItem from="1634725146143" duration="5937000" />
     </task>
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/swdgame21-development/core/src/main/java/at/campus02/swd/game/Outputter/PositionOutput.java</url>
+          <line>22</line>
+          <option name="timeStamp" value="1" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
   </component>
 </project>

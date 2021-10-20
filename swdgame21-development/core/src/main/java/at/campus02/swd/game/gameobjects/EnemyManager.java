@@ -19,20 +19,14 @@ public class EnemyManager implements EnemyObject {
         this.gameObjects = new Array<>();
         this.maxGameObjects = maxGameObjects;
         this.gameover = false;
-        for (int i = 0; i < maxGameObjects; i++) {
-            GameObject gameObject = abstractGameObjectFactory.createGameObject(GameObjectType.ENEMY);
-            gameObject.setPosition(MathUtils.random(200,800), MathUtils.random(600 - 120));
-            gameObject.printPosition(new PositionOutput());
-            gameObjects.add(gameObject);
-        }
-
+        createEnemies(200, 800, 0, 380);
     }
 
     @Override
-    public void createEnemies(float x, float y) {
+    public void createEnemies(float x1, float x2, float y1, float y2) {
         for (int i = gameObjects.size; i <= this.maxGameObjects; i++) {
             GameObject gameObject = abstractGameObjectFactory.createGameObject(GameObjectType.ENEMY);
-            gameObject.setPosition(x, y);
+            gameObject.setPosition(MathUtils.random(x1, x2), MathUtils.random(y1, y2));
             gameObject.printPosition(new PositionOutput());
             gameObjects.add(gameObject);
         }
