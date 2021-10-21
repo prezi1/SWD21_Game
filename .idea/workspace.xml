@@ -4,15 +4,17 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="a59d6f05-ed43-45c3-bf1b-c232caa47205" name="Default Changelist" comment="Neue version">
+    <list default="true" id="a59d6f05-ed43-45c3-bf1b-c232caa47205" name="Default Changelist" comment="Neueste Game-Version SWD 21">
+      <change afterPath="$PROJECT_DIR$/.idea/compiler.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/swdgame21-development/core/build.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/swdgame21-development/core/build.gradle" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/swdgame21-development/core/src/main/java/at/campus02/swd/game/Main_2.java" beforeDir="false" afterPath="$PROJECT_DIR$/swdgame21-development/core/src/main/java/at/campus02/swd/game/Main_2.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/swdgame21-development/core/src/main/java/at/campus02/swd/game/gameobjects/EnemyManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/swdgame21-development/core/src/main/java/at/campus02/swd/game/gameobjects/EnemyManager.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/swdgame21-development/core/src/main/java/at/campus02/swd/game/observer/EscapeLogger.java" beforeDir="false" afterPath="$PROJECT_DIR$/swdgame21-development/core/src/main/java/at/campus02/swd/game/observer/EscapeLogger.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/swdgame21-development/core/src/main/java/at/campus02/swd/game/observer/GameScore.java" beforeDir="false" afterPath="$PROJECT_DIR$/swdgame21-development/core/src/main/java/at/campus02/swd/game/observer/GameScore.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/swdgame21-development/core/src/main/java/at/campus02/swd/game/observer/Observable.java" beforeDir="false" afterPath="$PROJECT_DIR$/swdgame21-development/core/src/main/java/at/campus02/swd/game/observer/Observable.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/swdgame21-development/core/src/main/java/at/campus02/swd/game/observer/Observer.java" beforeDir="false" afterPath="$PROJECT_DIR$/swdgame21-development/core/src/main/java/at/campus02/swd/game/observer/Observer.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/swdgame21-development/core/src/main/java/at/campus02/swd/game/gameobjects/EnemyObject.java" beforeDir="false" afterPath="$PROJECT_DIR$/swdgame21-development/core/src/main/java/at/campus02/swd/game/gameobjects/EnemyObject.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/swdgame21-development/core/src/main/java/at/campus02/swd/game/gameobjects/GameObject.java" beforeDir="false" afterPath="$PROJECT_DIR$/swdgame21-development/core/src/main/java/at/campus02/swd/game/gameobjects/GameObject.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/swdgame21-development/core/src/main/java/at/campus02/swd/game/gameobjects/Ninja.java" beforeDir="false" afterPath="$PROJECT_DIR$/swdgame21-development/core/src/main/java/at/campus02/swd/game/gameobjects/Ninja.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/swdgame21-development/core/src/main/java/at/campus02/swd/game/gameobjects/Robot.java" beforeDir="false" afterPath="$PROJECT_DIR$/swdgame21-development/core/src/main/java/at/campus02/swd/game/gameobjects/Robot.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/swdgame21-development/core/src/main/java/at/campus02/swd/game/gameobjects/Zombie.java" beforeDir="false" afterPath="$PROJECT_DIR$/swdgame21-development/core/src/main/java/at/campus02/swd/game/gameobjects/Zombie.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -108,13 +110,15 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration default="true" type="ArquillianJUnit" factoryName="" nameIsGenerated="true">
+    <configuration default="true" type="ArquillianTestNG" factoryName="" nameIsGenerated="true">
       <option name="arquillianRunConfiguration">
         <value>
           <option name="containerStateName" value="" />
         </value>
       </option>
-      <option name="TEST_OBJECT" value="class" />
+      <option name="TEST_OBJECT" value="CLASS" />
+      <properties />
+      <listeners />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
@@ -141,7 +145,8 @@
       <workItem from="1634725146143" duration="5937000" />
       <workItem from="1634759393904" duration="50000" />
       <workItem from="1634759486299" duration="26000" />
-      <workItem from="1634797258536" duration="4193000" />
+      <workItem from="1634797258536" duration="4369000" />
+      <workItem from="1634807870701" duration="4427000" />
     </task>
     <task id="LOCAL-00001" summary="Neue version">
       <created>1634759430042</created>
@@ -150,7 +155,14 @@
       <option name="project" value="LOCAL" />
       <updated>1634759430042</updated>
     </task>
-    <option name="localTasksCounter" value="2" />
+    <task id="LOCAL-00002" summary="Neueste Game-Version SWD 21">
+      <created>1634801601092</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1634801601092</updated>
+    </task>
+    <option name="localTasksCounter" value="3" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -170,15 +182,16 @@
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="Neue version" />
-    <option name="LAST_COMMIT_MESSAGE" value="Neue version" />
+    <MESSAGE value="Neueste Game-Version SWD 21" />
+    <option name="LAST_COMMIT_MESSAGE" value="Neueste Game-Version SWD 21" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
       <breakpoints>
         <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/swdgame21-development/core/src/main/java/at/campus02/swd/game/Outputter/PositionOutput.java</url>
-          <line>22</line>
-          <option name="timeStamp" value="1" />
+          <url>file://$PROJECT_DIR$/swdgame21-development/core/src/main/java/at/campus02/swd/game/Main_2.java</url>
+          <line>115</line>
+          <option name="timeStamp" value="7" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>

@@ -11,13 +11,14 @@ import com.badlogic.gdx.math.MathUtils;
 
 public class Zombie implements GameObject {
     private Sprite sprite;
-    private float speed = MathUtils.random(30f, 60f);
+    private float speed;
 
     public Zombie() {
         Texture texture = AssetLoaderSingleton.getInstance().getZombieTexture();
         sprite = new Sprite(texture);
         sprite.setSize(120f, 120f);
         sprite.flip(true, false);
+        this.speed = MathUtils.random(30f, 60f);
     }
 
     @Override
@@ -39,6 +40,16 @@ public class Zombie implements GameObject {
     public void printPosition(PositionOutput positionOutput) {
        // positionOutput.print(new CSVOutputter(), getX(),getY(),"C02");
         positionOutput.print(getX(),getY(),this.getClass().getSimpleName());
+    }
+
+    @Override
+    public float getSpeed() {
+        return 0;
+    }
+
+    @Override
+    public void increaseSpeed(float factor) {
+        this.speed *= factor;
     }
 
     @Override

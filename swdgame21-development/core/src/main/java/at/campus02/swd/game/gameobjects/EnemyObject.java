@@ -11,4 +11,5 @@ public interface EnemyObject {
     void moveEnemy(float delta);
     void drawEnemy (SpriteBatch batch);
     boolean isGameover();
+    void increaseSpeed();
 }

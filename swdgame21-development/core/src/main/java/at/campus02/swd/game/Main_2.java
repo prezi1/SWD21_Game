@@ -24,6 +24,7 @@ public class Main_2 extends ApplicationAdapter {
     private final float updatesPerSecond = 60;
     private final float logicFrameTime = 1 / updatesPerSecond;
     private float deltaAccumulator = 0;
+    private float timeincreasespeed = 0;
     private AbstractGameObjectFactory gameObjectFactory;
 
     private GameObject player;
@@ -37,6 +38,7 @@ public class Main_2 extends ApplicationAdapter {
     private BitmapFont font12;
     private BitmapFont font32;
     private BitmapFont font;
+
     @Override
     public void create() {
         AssetLoaderSingleton.getInstance().loadAssets();
@@ -60,7 +62,7 @@ public class Main_2 extends ApplicationAdapter {
     private void act(float delta) {
         handleInputs(delta);
         enemyManager.moveEnemy(delta);
-        enemyManager.deleteEnemies(player.getX(), player.getY(), 50);
+        enemyManager.deleteEnemies(player.getX(), player.getY(), 75);
         if (!enemyManager.isGameover()) {
             enemyManager.createEnemies(800, 800, 0, 380);
         }
@@ -102,6 +104,13 @@ public class Main_2 extends ApplicationAdapter {
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
         float delta = Gdx.graphics.getDeltaTime();
         deltaAccumulator += delta;
+        timeincreasespeed += delta;
+
+        if (timeincreasespeed > 5) {
+            enemyManager.increaseSpeed();
+            timeincreasespeed = 0;
+        }
+
         while (deltaAccumulator > logicFrameTime) {
             deltaAccumulator -= logicFrameTime;
             act(logicFrameTime);

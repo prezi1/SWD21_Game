@@ -14,7 +14,7 @@ public class EnemyManager implements EnemyObject {
     private int maxGameObjects;
     private boolean gameover;
     private Observable observable;
-    private Integer EnemyEscaped;
+    private float speedfactor;
 
 
     public EnemyManager(AbstractGameObjectFactory abstractGameObjectFactory, int maxGameObjects, Observable observable) {
@@ -22,8 +22,10 @@ public class EnemyManager implements EnemyObject {
         this.gameObjects = new Array<>();
         this.maxGameObjects = maxGameObjects;
         this.gameover = false;
+        this.speedfactor = 1;
         createEnemies(200, 800, 0, 380);
         this.observable = observable;
+
 
     }
 
@@ -31,6 +33,7 @@ public class EnemyManager implements EnemyObject {
     public void createEnemies(float x1, float x2, float y1, float y2) {
         for (int i = gameObjects.size; i <= this.maxGameObjects; i++) {
             GameObject gameObject = abstractGameObjectFactory.createGameObject(GameObjectType.ENEMY);
+            gameObject.increaseSpeed(this.speedfactor);
             gameObject.setPosition(MathUtils.random(x1, x2), MathUtils.random(y1, y2));
             gameObject.printPosition(new PositionOutput());
             gameObjects.add(gameObject);
@@ -79,6 +82,11 @@ public class EnemyManager implements EnemyObject {
     @Override
     public boolean isGameover() {
         return this.gameover;
+    }
+
+    @Override
+    public void increaseSpeed() {
+        this.speedfactor *= 1.3;
     }
 
 

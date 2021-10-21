@@ -12,13 +12,14 @@ import com.badlogic.gdx.math.MathUtils;
 
 public class Robot implements GameObject {
     private Sprite sprite;
-    private float speed = MathUtils.random(30f, 60f);
+    private float speed;
 
     public Robot() {
         Texture texture = AssetLoaderSingleton.getInstance().getRobotTexture();
         sprite = new Sprite(texture);
         sprite.setSize(120f, 120f);
         sprite.flip(true, false);
+        speed = MathUtils.random(30f, 60f);
     }
 
     @Override
@@ -46,6 +47,16 @@ public class Robot implements GameObject {
         }
         */
         positionOutput.print(getX(),getY(),this.getClass().getSimpleName());
+    }
+
+    @Override
+    public float getSpeed() {
+        return this.speed;
+    }
+
+    @Override
+    public void increaseSpeed(float factor) {
+        this.speed *= factor;
     }
 
     @Override

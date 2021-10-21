@@ -11,5 +11,7 @@ public interface GameObject {
     float getY();
     void draw(SpriteBatch batch);
     void printPosition(PositionOutput positionOutput);
+    float getSpeed();
+    void increaseSpeed(float factor);
 
 }

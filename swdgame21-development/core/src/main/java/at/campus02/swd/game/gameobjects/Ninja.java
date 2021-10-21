@@ -47,8 +47,18 @@ public class Ninja implements GameObject {
     }
 
     @Override
+    public void increaseSpeed(float factor) {
+
+    }
+
+    @Override
     public void printPosition(PositionOutput positionOutput) {
 
+    }
+
+    @Override
+    public float getSpeed() {
+        return 0;
     }
 
 
