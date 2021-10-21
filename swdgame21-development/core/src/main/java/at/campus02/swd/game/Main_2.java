@@ -1,9 +1,11 @@
 package at.campus02.swd.game;
 
-import at.campus02.swd.game.Outputter.PositionOutput;
 import at.campus02.swd.game.commands.MoveDownCommand;
 import at.campus02.swd.game.commands.MoveUpCommand;
 import at.campus02.swd.game.gameobjects.*;
+import at.campus02.swd.game.observer.CatchLogger;
+import at.campus02.swd.game.observer.GameScore;
+import at.campus02.swd.game.observer.Observable;
 import com.badlogic.gdx.ApplicationAdapter;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
@@ -11,7 +13,6 @@ import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.utils.Array;
 
 /**
@@ -30,19 +31,29 @@ public class Main_2 extends ApplicationAdapter {
     private MoveUpCommand moveUpCommand;
     private EnemyObject enemyManager;
 
+    private Observable observable;
+    private GameScore gameScore;
+    private CatchLogger catchLogger;
+    private BitmapFont font12;
+    private BitmapFont font32;
+    private BitmapFont font;
     @Override
     public void create() {
         AssetLoaderSingleton.getInstance().loadAssets();
-
+        observable = new Observable();
+        gameScore = new GameScore();
+        catchLogger = new CatchLogger();
+        observable.registerObserver(gameScore);
+        observable.registerObserver(catchLogger);
         gameObjectFactory = new RobotGameObjectFactory();
         //gameObjectFactory = new ZombieGameObjectFactory();
-        enemyManager = new EnemyManager(gameObjectFactory, 10);
-
+        enemyManager = new EnemyManager(gameObjectFactory, 10, observable);
         batch = new SpriteBatch();
         player = gameObjectFactory.createGameObject(GameObjectType.PLAYER);
         moveUpCommand = new MoveUpCommand(player, 10);
         moveDownCommand = new MoveDownCommand(player, 10);
-        enemyManager.createEnemies(0,800, 0,380);
+        enemyManager.createEnemies(0, 800, 0, 380);
+        font = new BitmapFont();
 
     }
 
@@ -51,19 +62,21 @@ public class Main_2 extends ApplicationAdapter {
         enemyManager.moveEnemy(delta);
         enemyManager.deleteEnemies(player.getX(), player.getY(), 50);
         if (!enemyManager.isGameover()) {
-            enemyManager.createEnemies(800,800, 0, 380);
+            enemyManager.createEnemies(800, 800, 0, 380);
         }
     }
 
     private void draw() {
         batch.begin();
+        font.setColor(Color.BLACK);
+        font.getData().setScale(2, 2);
+        font.draw(batch, Integer.toString(catchLogger.getCounter()), 750, 590);
         if (!enemyManager.isGameover()) {
             enemyManager.drawEnemy(batch);
             player.draw(batch);
-        }else{
-            BitmapFont font = new BitmapFont();
+        } else {
             font.setColor(Color.BLACK);
-            font.draw(batch,"GAME OVER!",350,350);
+            font.draw(batch, "GAME OVER!", 320, 350);
         }
         batch.end();
     }

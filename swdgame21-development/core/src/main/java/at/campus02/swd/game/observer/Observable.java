@@ -20,7 +20,7 @@ public class Observable {
 
     public void notifyObservers() {
         for (Observer observer : this.observer) {
-            observer.EnemyEscaped();
+            observer.EnemyCatched();
         }
     }
 

@@ -2,6 +2,7 @@ package at.campus02.swd.game.gameobjects;
 
 
 import at.campus02.swd.game.Outputter.PositionOutput;
+import at.campus02.swd.game.observer.Observable;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.utils.Array;
@@ -12,14 +13,18 @@ public class EnemyManager implements EnemyObject {
     private final AbstractGameObjectFactory abstractGameObjectFactory;
     private int maxGameObjects;
     private boolean gameover;
+    private Observable observable;
+    private Integer EnemyEscaped;
 
 
-    public EnemyManager(AbstractGameObjectFactory abstractGameObjectFactory, int maxGameObjects) {
+    public EnemyManager(AbstractGameObjectFactory abstractGameObjectFactory, int maxGameObjects, Observable observable) {
         this.abstractGameObjectFactory = abstractGameObjectFactory;
         this.gameObjects = new Array<>();
         this.maxGameObjects = maxGameObjects;
         this.gameover = false;
         createEnemies(200, 800, 0, 380);
+        this.observable = observable;
+
     }
 
     @Override
@@ -36,8 +41,9 @@ public class EnemyManager implements EnemyObject {
     public void deleteEnemies(float posplayerX, float posplayerY, float dist) {
         Array<GameObject> toRemove = new Array<>();
         for (GameObject gameObject : gameObjects) {
-            if ((gameObject.getX() <= (posplayerX + dist) && gameObject.getX() > 0 &&
-                    gameObject.getY() <= (posplayerY + dist) && gameObject.getY() >= (posplayerY - dist))) {
+            if ((gameObject.getX() <= (posplayerX + dist) && gameObject.getX() > 0 && gameObject.getY() <= (posplayerY + dist)
+                    && gameObject.getY() >= (posplayerY - dist))) {
+                this.observable.notifyObservers();
                 toRemove.add(gameObject);
             } else if (gameObject.getX() < -50) {
                 toRemove.addAll(gameObjects);
@@ -74,5 +80,6 @@ public class EnemyManager implements EnemyObject {
     public boolean isGameover() {
         return this.gameover;
     }
+
 
 }
