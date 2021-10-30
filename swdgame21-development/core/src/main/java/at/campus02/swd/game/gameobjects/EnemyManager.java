@@ -2,36 +2,35 @@ package at.campus02.swd.game.gameobjects;
 
 
 import at.campus02.swd.game.Outputter.PositionOutput;
+import at.campus02.swd.game.Strategies.GameTypeStrategy;
 import at.campus02.swd.game.observer.Observable;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.utils.Array;
 
-public class EnemyManager implements EnemyObject {
+public class EnemyManager {
 
     private Array<GameObject> gameObjects;
     private final AbstractGameObjectFactory abstractGameObjectFactory;
     private int maxGameObjects;
-    private boolean gameover;
     private Observable observable;
     private float speedfactor;
+    private GameTypeStrategy gameTypeStrategy;
 
 
-    public EnemyManager(AbstractGameObjectFactory abstractGameObjectFactory, int maxGameObjects, Observable observable) {
+    public EnemyManager(AbstractGameObjectFactory abstractGameObjectFactory, GameTypeStrategy gameTypeStrategy, Observable observable) {
         this.abstractGameObjectFactory = abstractGameObjectFactory;
         this.gameObjects = new Array<>();
         this.maxGameObjects = maxGameObjects;
-        this.gameover = false;
         this.speedfactor = 1;
-        createEnemies(200, 800, 0, 380);
         this.observable = observable;
-
+        this.gameTypeStrategy = gameTypeStrategy;
+        gameTypeStrategy.init(this);
 
     }
 
-    @Override
-    public void createEnemies(float x1, float x2, float y1, float y2) {
-        for (int i = gameObjects.size; i <= this.maxGameObjects; i++) {
+    public void createEnemies(float x1, float x2, float y1, float y2, int count) {
+        for (int i = gameObjects.size; i <= count; i++) {
             GameObject gameObject = abstractGameObjectFactory.createGameObject(GameObjectType.ENEMY);
             gameObject.increaseSpeed(this.speedfactor);
             gameObject.setPosition(MathUtils.random(x1, x2), MathUtils.random(y1, y2));
@@ -40,51 +39,65 @@ public class EnemyManager implements EnemyObject {
         }
     }
 
-    @Override
-    public void deleteEnemies(float posplayerX, float posplayerY, float dist) {
-        Array<GameObject> toRemove = new Array<>();
-        for (GameObject gameObject : gameObjects) {
-            if ((gameObject.getX() <= (posplayerX + dist) && gameObject.getX() > 0 && gameObject.getY() <= (posplayerY + dist)
-                    && gameObject.getY() >= (posplayerY - dist))) {
-                this.observable.notifyObservers();
-                toRemove.add(gameObject);
-            } else if (gameObject.getX() < -50) {
-                toRemove.addAll(gameObjects);
-                this.gameover = true;
+
+    public void removeAllEnemies() {
+        gameObjects.clear();
+    }
+
+    public void reset(GameObject enemy){
+        enemy.setPosition(0,enemy.getY());
+    }
+
+    public void removeEnemy(GameObject enemy) {
+        gameObjects.removeValue(enemy, true);
+        this.observable.notifyObservers();
+    }
+
+    public void removeEnemy(Array<GameObject> enemies) {
+        gameObjects.removeAll(enemies,true);
+        for (int i=0; i < enemies.size; i++){
+            this.observable.notifyObservers();
+        }
+    }
+
+    public Array<GameObject> getGameObjects() {
+        return gameObjects;
+    }
+
+    public Array<GameObject> getEnemiesinRange(GameObject player, float range){
+        Array<GameObject> EnemiesinRange = new Array<>();
+        for (GameObject gameObject : this.gameObjects) {
+            if ((gameObject.getX() <= (player.getX() + range) && gameObject.getX() > 0 && gameObject.getY() <= (player.getY() + range)
+                    && gameObject.getY() >= (player.getY() - range))) {
+                EnemiesinRange.add(gameObject);
             }
-            gameObjects.removeAll(toRemove, true);
-            toRemove.clear();
-
         }
-    }
-
-    @Override
-    public void setMaxEnemies(int maxGameObjects) {
-        this.maxGameObjects = maxGameObjects;
+        return EnemiesinRange;
     }
 
 
-    @Override
-    public void moveEnemy(float delta) {
+    /*
+    public Array<GameObject> destroyEnemies(GameObject player, float range) {
         for (GameObject gameObject : this.gameObjects) {
-            gameObject.act(delta);
-        }
+            if ((gameObject.getX() <= (player.getX() + range) && gameObject.getX() > 0 && gameObject.getY() <= (player.getY() + range)
+                    && gameObject.getY() >= (player.getY() - range))) {
 
-    }
-
-    @Override
-    public void drawEnemy(SpriteBatch batch) {
-        for (GameObject gameObject : this.gameObjects) {
-            gameObject.draw(batch);
+            }
         }
     }
+    *
+     */
 
-    @Override
-    public boolean isGameover() {
-        return this.gameover;
+    public void act(float delta) {
+        gameTypeStrategy.act(this, delta);
     }
 
-    @Override
+    public void MngStr() {
+
+    }
+
+
+
     public void increaseSpeed() {
         this.speedfactor *= 1.3;
     }

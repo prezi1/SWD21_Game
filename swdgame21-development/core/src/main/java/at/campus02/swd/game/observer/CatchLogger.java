@@ -10,7 +10,7 @@ public class CatchLogger implements Observer{
     @Override
     public void EnemyCatched() {
         this.counter += 1;
-        System.out.println("Number of enemys catched: " + this.counter);
+        System.out.println("Number of enemys killed: " + this.counter);
     }
 
     public Integer getCounter() {
