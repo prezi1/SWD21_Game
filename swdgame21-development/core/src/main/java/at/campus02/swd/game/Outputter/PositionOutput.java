@@ -1,7 +1,5 @@
 package at.campus02.swd.game.Outputter;
 
-import at.campus02.swd.game.gameobjects.GameObject;
-
 public class PositionOutput {
 
     private final CSVOutputter csvOutputter = new CSVOutputter();

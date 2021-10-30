@@ -2,8 +2,6 @@ package at.campus02.swd.game.Strategies;
 
 import at.campus02.swd.game.gameobjects.EnemyManager;
 import at.campus02.swd.game.gameobjects.GameObject;
-import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-import com.badlogic.gdx.utils.Array;
 
 public class GameTypeStrategy implements ManagmentStrategy {
 

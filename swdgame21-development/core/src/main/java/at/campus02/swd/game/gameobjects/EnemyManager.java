@@ -30,7 +30,7 @@ public class EnemyManager {
     }
 
     public void createEnemies(float x1, float x2, float y1, float y2, int count) {
-        for (int i = gameObjects.size; i <= count; i++) {
+        for (int i = 0; i < count; i++) {
             GameObject gameObject = abstractGameObjectFactory.createGameObject(GameObjectType.ENEMY);
             gameObject.increaseSpeed(this.speedfactor);
             gameObject.setPosition(MathUtils.random(x1, x2), MathUtils.random(y1, y2));

@@ -5,25 +5,15 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="a59d6f05-ed43-45c3-bf1b-c232caa47205" name="Default Changelist" comment="Neueste Game-Version SWD 21">
-      <change afterPath="$PROJECT_DIR$/swdgame21-development/core/src/main/java/at/campus02/swd/game/Strategies/GameTypeStrategy.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/swdgame21-development/core/src/main/java/at/campus02/swd/game/Strategies/ManagmentStrategy.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/swdgame21-development/core/src/main/java/at/campus02/swd/game/Weapon/Gun.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/swdgame21-development/core/src/main/java/at/campus02/swd/game/Weapon/Knife.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/swdgame21-development/core/src/main/java/at/campus02/swd/game/Weapon/Sword.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/swdgame21-development/core/src/main/java/at/campus02/swd/game/Weapon/Weapon.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/swdgame21-development/core/src/main/java/at/campus02/swd/game/Main_2.java" beforeDir="false" afterPath="$PROJECT_DIR$/swdgame21-development/core/src/main/java/at/campus02/swd/game/Main_2.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/swdgame21-development/core/src/main/java/at/campus02/swd/game/gameobjects/AbstractGameObjectFactory.java" beforeDir="false" afterPath="$PROJECT_DIR$/swdgame21-development/core/src/main/java/at/campus02/swd/game/gameobjects/AbstractGameObjectFactory.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/swdgame21-development/core/src/main/java/at/campus02/swd/game/Outputter/PositionOutput.java" beforeDir="false" afterPath="$PROJECT_DIR$/swdgame21-development/core/src/main/java/at/campus02/swd/game/Outputter/PositionOutput.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/swdgame21-development/core/src/main/java/at/campus02/swd/game/Strategies/GameTypeStrategy.java" beforeDir="false" afterPath="$PROJECT_DIR$/swdgame21-development/core/src/main/java/at/campus02/swd/game/Strategies/GameTypeStrategy.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/swdgame21-development/core/src/main/java/at/campus02/swd/game/Strategies/ManagmentStrategy.java" beforeDir="false" afterPath="$PROJECT_DIR$/swdgame21-development/core/src/main/java/at/campus02/swd/game/Strategies/ManagmentStrategy.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/swdgame21-development/core/src/main/java/at/campus02/swd/game/gameobjects/EnemyManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/swdgame21-development/core/src/main/java/at/campus02/swd/game/gameobjects/EnemyManager.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/swdgame21-development/core/src/main/java/at/campus02/swd/game/gameobjects/EnemyObject.java" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/swdgame21-development/core/src/main/java/at/campus02/swd/game/gameobjects/GameObject.java" beforeDir="false" afterPath="$PROJECT_DIR$/swdgame21-development/core/src/main/java/at/campus02/swd/game/gameobjects/GameObject.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/swdgame21-development/core/src/main/java/at/campus02/swd/game/gameobjects/Ninja.java" beforeDir="false" afterPath="$PROJECT_DIR$/swdgame21-development/core/src/main/java/at/campus02/swd/game/gameobjects/Ninja.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/swdgame21-development/core/src/main/java/at/campus02/swd/game/gameobjects/Robot.java" beforeDir="false" afterPath="$PROJECT_DIR$/swdgame21-development/core/src/main/java/at/campus02/swd/game/gameobjects/Robot.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/swdgame21-development/core/src/main/java/at/campus02/swd/game/gameobjects/RobotGameObjectFactory.java" beforeDir="false" afterPath="$PROJECT_DIR$/swdgame21-development/core/src/main/java/at/campus02/swd/game/gameobjects/RobotGameObjectFactory.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/swdgame21-development/core/src/main/java/at/campus02/swd/game/gameobjects/Zombie.java" beforeDir="false" afterPath="$PROJECT_DIR$/swdgame21-development/core/src/main/java/at/campus02/swd/game/gameobjects/Zombie.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/swdgame21-development/core/src/main/java/at/campus02/swd/game/gameobjects/ZombieGameObjectFactory.java" beforeDir="false" afterPath="$PROJECT_DIR$/swdgame21-development/core/src/main/java/at/campus02/swd/game/gameobjects/ZombieGameObjectFactory.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/swdgame21-development/core/src/main/java/at/campus02/swd/game/observer/CatchLogger.java" beforeDir="false" afterPath="$PROJECT_DIR$/swdgame21-development/core/src/main/java/at/campus02/swd/game/observer/CatchLogger.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/swdgame21-development/core/src/main/java/at/campus02/swd/game/observer/GameScore.java" beforeDir="false" afterPath="$PROJECT_DIR$/swdgame21-development/core/src/main/java/at/campus02/swd/game/observer/GameScore.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -119,13 +109,15 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration default="true" type="ArquillianJUnit" factoryName="" nameIsGenerated="true">
+    <configuration default="true" type="ArquillianTestNG" factoryName="" nameIsGenerated="true">
       <option name="arquillianRunConfiguration">
         <value>
           <option name="containerStateName" value="" />
         </value>
       </option>
-      <option name="TEST_OBJECT" value="class" />
+      <option name="TEST_OBJECT" value="CLASS" />
+      <properties />
+      <listeners />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
@@ -159,7 +151,8 @@
       <workItem from="1634919481284" duration="65000" />
       <workItem from="1634970670621" duration="4480000" />
       <workItem from="1634981122639" duration="643000" />
-      <workItem from="1635596478537" duration="16564000" />
+      <workItem from="1635596478537" duration="16933000" />
+      <workItem from="1635617637614" duration="2348000" />
     </task>
     <task id="LOCAL-00001" summary="Neue version">
       <created>1634759430042</created>
@@ -182,7 +175,14 @@
       <option name="project" value="LOCAL" />
       <updated>1634812531765</updated>
     </task>
-    <option name="localTasksCounter" value="4" />
+    <task id="LOCAL-00004" summary="Neueste Game-Version SWD 21">
+      <created>1635616502331</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1635616502331</updated>
+    </task>
+    <option name="localTasksCounter" value="5" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">

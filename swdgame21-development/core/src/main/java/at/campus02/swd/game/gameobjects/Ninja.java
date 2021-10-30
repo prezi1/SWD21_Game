@@ -7,11 +7,7 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 
-public class Ninja implements GameObject{
-    private Sprite sprite;
-    private Weapon weapon;
-
-
+public class Ninja extends GameObject {
 
     public enum Type {
         MALE,
@@ -25,6 +21,7 @@ public class Ninja implements GameObject{
         sprite = new Sprite(texture);
         sprite.setSize(120f, 120f);
         this.weapon = weapon;
+        speed = 0;
     }
 
     public Weapon getWeapon() {
@@ -34,45 +31,6 @@ public class Ninja implements GameObject{
     @Override
     public float getHealth() {
         return 100;
-    }
-
-    @Override
-    public void act(float delta) {
-    }
-
-    @Override
-    public void setPosition(float x, float y) {
-        sprite.setPosition(x,y);
-    }
-
-    @Override
-    public float getX() {
-        return sprite.getX();
-    }
-
-    @Override
-    public float getY() {
-        return sprite.getY();
-    }
-
-    @Override
-    public void draw(SpriteBatch batch) {
-        sprite.draw(batch);
-    }
-
-    @Override
-    public void increaseSpeed(float factor) {
-
-    }
-
-    @Override
-    public void damage(float amount) {
-
-    }
-
-    @Override
-    public void printPosition(PositionOutput positionOutput) {
-
     }
 
     @Override
