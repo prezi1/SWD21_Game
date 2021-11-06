@@ -23,17 +23,17 @@ import com.badlogic.gdx.utils.Array;
  */
 public class Main_2 extends ApplicationAdapter {
     private SpriteBatch batch;
-    private final Array<GameObject> enemyGameObjects = new Array<>();
+    private final Array<CreatureGameObject> enemyGameObjects = new Array<>();
     private final float updatesPerSecond = 60;
     private final float logicFrameTime = 1 / updatesPerSecond;
     private float deltaAccumulator = 0;
     private float timeincreasespeed = 0;
     private AbstractGameObjectFactory gameObjectFactory;
 
-    private GameObject player;
+    private CreatureGameObject player;
     private MoveDownCommand moveDownCommand;
     private MoveUpCommand moveUpCommand;
-    private EnemyManager enemyManager;
+    private CreatureManager creatureManager;
 
     private Observable observable;
     private GameScore gameScore;
@@ -42,6 +42,7 @@ public class Main_2 extends ApplicationAdapter {
     private BitmapFont font32;
     private BitmapFont font;
     private GameTypeStrategy gameTypeStrategy;
+    private ProjectileManager projectileManager;
 
     @Override
     public void create() {
@@ -52,23 +53,24 @@ public class Main_2 extends ApplicationAdapter {
         observable.registerObserver(gameScore);
         observable.registerObserver(catchLogger);
         gameObjectFactory = new RobotGameObjectFactory();
-        Weapon gun = new Gun();
+        projectileManager = new ProjectileManager(gameObjectFactory);
+        Weapon gun = new Gun(projectileManager,GameObjectDirection.RIGHT);
 
         //gameObjectFactory = new ZombieGameObjectFactory();
 
         batch = new SpriteBatch();
-        player = gameObjectFactory.createGameObject(GameObjectType.PLAYER, gun);
+        player = gameObjectFactory.createCreatureGameObject(GameObjectType.PLAYER, gun);
         moveUpCommand = new MoveUpCommand(player, 10);
         moveDownCommand = new MoveDownCommand(player, 10);
         gameTypeStrategy = new GameTypeStrategy(player, 10);
-        enemyManager = new EnemyManager(gameObjectFactory, gameTypeStrategy, observable);
+        creatureManager = new CreatureManager(gameObjectFactory, gameTypeStrategy, observable,projectileManager);
         font = new BitmapFont();
 
     }
 
     private void act(float delta) {
         handleInputs(delta);
-        enemyManager.act(delta);
+        creatureManager.act(delta);
         /*
         enemyManager.moveEnemy(delta);
         enemyManager.deleteEnemies(player.getX(), player.getY(), 75);
@@ -85,12 +87,15 @@ public class Main_2 extends ApplicationAdapter {
         font.getData().setScale(2, 2);
         font.draw(batch, Integer.toString(catchLogger.getCounter()), 750, 590);
 
-        for (GameObject gameObject : enemyManager.getGameObjects()) {
-            gameObject.draw(batch);
+        for (CreatureGameObject creatureGameObject : creatureManager.getGameObjects()) {
+            creatureGameObject.draw(batch);
+        }
+
+        for (GameObject projectile : projectileManager.getProjectile()){
+            projectile.draw(batch);
         }
 
         player.draw(batch);
-
 
         if (gameTypeStrategy.GameOver()){
             font.setColor(Color.BLACK);
@@ -98,7 +103,6 @@ public class Main_2 extends ApplicationAdapter {
         }
 
         batch.end();
-
 
     }
 
@@ -116,7 +120,7 @@ public class Main_2 extends ApplicationAdapter {
         }
 
         if (Gdx.input.isKeyJustPressed(Input.Keys.SPACE)){
-            player.getWeapon().execute(enemyManager,player);
+            player.getWeapon().execute(creatureManager,player);
         }
 
         if (Gdx.input.isKeyJustPressed(Input.Keys.R)){
@@ -135,7 +139,7 @@ public class Main_2 extends ApplicationAdapter {
 
 
         if (timeincreasespeed > 5) {
-            enemyManager.increaseSpeed();
+            creatureManager.increaseSpeed();
             timeincreasespeed = 0;
         }
 

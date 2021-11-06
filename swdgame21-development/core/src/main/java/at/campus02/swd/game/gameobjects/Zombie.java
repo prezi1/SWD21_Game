@@ -1,19 +1,29 @@
 package at.campus02.swd.game.gameobjects;
 
 import at.campus02.swd.game.AssetLoaderSingleton;
-import at.campus02.swd.game.Outputter.CSVOutputter;
-import at.campus02.swd.game.Outputter.Output;
-import at.campus02.swd.game.Outputter.PositionOutput;
 import at.campus02.swd.game.Weapon.Weapon;
-import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Sprite;
-import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.MathUtils;
 
-public class Zombie extends GameObject {
+public class Zombie extends CreatureGameObject {
 
-    public Zombie() {
-        super();
+    public Zombie(Weapon _weapon) {
+        weapon = _weapon;
+        texture = AssetLoaderSingleton.getInstance().getZombieTexture();
+        sprite = new Sprite(texture);
+        sprite.setSize(120f, 120f);
+        sprite.flip(true, false);
+        speed = MathUtils.random(30f, 60f);
+        health = 100; //percentage
     }
+    public Zombie() {
+        texture = AssetLoaderSingleton.getInstance().getZombieTexture();
+        sprite = new Sprite(texture);
+        sprite.setSize(120f, 120f);
+        sprite.flip(true, false);
+        speed = MathUtils.random(30f, 60f);
+        health = 100; //percentage
+    }
+
 }
 

@@ -1,13 +1,11 @@
 package at.campus02.swd.game.gameobjects;
 
 import at.campus02.swd.game.AssetLoaderSingleton;
-import at.campus02.swd.game.Outputter.PositionOutput;
 import at.campus02.swd.game.Weapon.Weapon;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Sprite;
-import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 
-public class Ninja extends GameObject {
+public class Ninja extends CreatureGameObject {
 
     public enum Type {
         MALE,
@@ -22,6 +20,7 @@ public class Ninja extends GameObject {
         sprite.setSize(120f, 120f);
         this.weapon = weapon;
         speed = 0;
+
     }
 
     public Weapon getWeapon() {

@@ -8,11 +8,9 @@ import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.MathUtils;
 
-public class GameObject {
+public class CreatureGameObject extends GameObject implements ICreatureGameObject {
 
-    protected Sprite sprite;
     protected Weapon weapon;
-    protected float speed;
     protected float health;
 
     public enum Type {
@@ -20,30 +18,10 @@ public class GameObject {
         FEMALE
     }
 
-    public GameObject() {
-        Texture texture = AssetLoaderSingleton.getInstance().getRobotTexture();
-        sprite = new Sprite(texture);
-        sprite.setSize(120f, 120f);
-        sprite.flip(true, false);
-        speed = MathUtils.random(30f, 60f);
-        health = 100; //percentage
-    }
-
-
-    public void act(float delta) {
-        sprite.setPosition(sprite.getX() - speed * delta, sprite.getY());
-    }
-
-
-    public void setPosition(float x, float y) {
-        sprite.setPosition(x, y);
-    }
-
 
     public void draw(SpriteBatch batch) {
         sprite.draw(batch);
     }
-
 
     public void printPosition(PositionOutput positionOutput) {
         /*
@@ -75,24 +53,14 @@ public class GameObject {
         }
     }
 
-
     public Weapon getWeapon() {
-        return null;
+        return weapon;
     }
 
     public float getHealth() {
         return this.health;
     }
 
-
-    public float getX() {
-        return sprite.getX();
-    }
-
-
-    public float getY() {
-        return sprite.getY();
-    }
 }
 
 

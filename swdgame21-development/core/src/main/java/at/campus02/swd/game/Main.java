@@ -1,9 +1,6 @@
 package at.campus02.swd.game;
 
-import at.campus02.swd.game.Outputter.CSVOutputter;
-import at.campus02.swd.game.Outputter.Output;
 import at.campus02.swd.game.Outputter.PositionOutput;
-import at.campus02.swd.game.Outputter.TextOuputter;
 import at.campus02.swd.game.commands.MoveDownCommand;
 import at.campus02.swd.game.commands.MoveUpCommand;
 import at.campus02.swd.game.gameobjects.*;
@@ -18,13 +15,13 @@ import com.badlogic.gdx.utils.Array;
 /** {@link com.badlogic.gdx.ApplicationListener} implementation shared by all platforms. */
 public class Main extends ApplicationAdapter {
 	private SpriteBatch batch;
-	private final Array<GameObject> enemyGameObjects = new Array<>();
+	private final Array<CreatureGameObject> enemyGameObjects = new Array<>();
 	private final float updatesPerSecond = 60;
 	private final float logicFrameTime = 1 / updatesPerSecond;
 	private float deltaAccumulator = 0;
 	private AbstractGameObjectFactory gameObjectFactory;
 
-	private GameObject player;
+	private CreatureGameObject player;
 	private MoveDownCommand moveDownCommand;
 	private MoveUpCommand moveUpCommand;
 
@@ -34,29 +31,29 @@ public class Main extends ApplicationAdapter {
 		gameObjectFactory = new RobotGameObjectFactory();
 		//gameObjectFactory = new ZombieGameObjectFactory();
 		batch = new SpriteBatch();
-		player = gameObjectFactory.createGameObject(GameObjectType.PLAYER);
+		player = gameObjectFactory.createCreatureGameObject(GameObjectType.PLAYER);
 		moveUpCommand = new MoveUpCommand(player, 10);
 		moveDownCommand = new MoveDownCommand(player, 10);
 
 		for(int i = 0; i < 10; i++) {
-			GameObject gameObject = gameObjectFactory.createGameObject(GameObjectType.ENEMY);
-			gameObject.setPosition(MathUtils.random(800), MathUtils.random(600-120));
-			enemyGameObjects.add(gameObject);
+			CreatureGameObject creatureGameObject = gameObjectFactory.createCreatureGameObject(GameObjectType.ENEMY);
+			creatureGameObject.setPosition(MathUtils.random(800), MathUtils.random(600-120));
+			enemyGameObjects.add(creatureGameObject);
 		}
 	}
 
 	private void act(float delta) {
 		handleInputs(delta);
-		Array<GameObject> toRemove = new Array<>();
-		for(GameObject gameObject : enemyGameObjects) {
-			gameObject.act(delta);
-			if(gameObject.getX() < 0) {
-				toRemove.add(gameObject);
+		Array<CreatureGameObject> toRemove = new Array<>();
+		for(CreatureGameObject creatureGameObject : enemyGameObjects) {
+			creatureGameObject.act(delta);
+			if(creatureGameObject.getX() < 0) {
+				toRemove.add(creatureGameObject);
 			}
 		}
 		enemyGameObjects.removeAll(toRemove, true);
 		for(int i = 0; i < toRemove.size; i++) {
-			GameObject enemy = gameObjectFactory.createGameObject(GameObjectType.ENEMY);
+			CreatureGameObject enemy = gameObjectFactory.createCreatureGameObject(GameObjectType.ENEMY);
 			enemy.setPosition(800, MathUtils.random(0, 600-120));
 			enemy.printPosition(new PositionOutput());
 			enemyGameObjects.add(enemy);
@@ -66,8 +63,8 @@ public class Main extends ApplicationAdapter {
 
 	private void draw() {
 		batch.begin();
-		for(GameObject gameObject : enemyGameObjects) {
-			gameObject.draw(batch);
+		for(CreatureGameObject creatureGameObject : enemyGameObjects) {
+			creatureGameObject.draw(batch);
 		}
 		player.draw(batch);
 		batch.end();

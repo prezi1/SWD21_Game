@@ -9,6 +9,7 @@ public class AssetLoaderSingleton {
     private Texture robotTexture;
     private Texture maleNinjaTexture;
     private Texture femaleNinjaTexture;
+    private Texture bulletTexture;
 
     private AssetLoaderSingleton() {};
 
@@ -24,6 +25,7 @@ public class AssetLoaderSingleton {
         robotTexture = new Texture("robot.png");
         maleNinjaTexture = new Texture("male-ninja.png");
         femaleNinjaTexture = new Texture("female-ninja.png");
+        bulletTexture = new Texture("bullet.png");
     }
 
     public Texture getZombieTexture() {
@@ -40,6 +42,10 @@ public class AssetLoaderSingleton {
 
     public Texture getRobotTexture() {
         return robotTexture;
+    }
+
+    public Texture getBulletTexture(){
+        return bulletTexture;
     }
 
     public void dispose() {
