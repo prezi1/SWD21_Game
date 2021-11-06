@@ -72,11 +72,13 @@ public class CreatureManager {
         return creatureGameObjects;
     }
 
-    public Array<CreatureGameObject> getCreaturesinRange(GameObject gameObject, float range){
+    public Array<CreatureGameObject> getCreaturesinRange(GameObject gameObject, float range, GameObjectType type){
         Array<CreatureGameObject> creaturesInRange = new Array<>();
         for (CreatureGameObject creatureGameObject : this.creatureGameObjects) {
-            if ((creatureGameObject.getX() <= (gameObject.getX() + range) && creatureGameObject.getX() > 0 && creatureGameObject.getY() <= (gameObject.getY() + range)
-                    && creatureGameObject.getY() >= (gameObject.getY() - range))) {
+
+
+            if ((creatureGameObject.getX() <= (gameObject.getX() + range) && creatureGameObject.getX() > 0 && creatureGameObject.getY() <= (gameObject.getY() + 20)
+                    && creatureGameObject.getY() >= (gameObject.getY() - 200))) {
                 creaturesInRange.add(creatureGameObject);
             }
         }

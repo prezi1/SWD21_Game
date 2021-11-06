@@ -11,9 +11,6 @@ public class Knife implements Weapon{
     @Override
     public void execute(CreatureManager creatureManager, CreatureGameObject player) {
 
-        for (CreatureGameObject creatureGameObject : creatureManager.getCreaturesinRange(player,range)){
-            creatureGameObject.damage(damage);
-        }
 
     }
 }

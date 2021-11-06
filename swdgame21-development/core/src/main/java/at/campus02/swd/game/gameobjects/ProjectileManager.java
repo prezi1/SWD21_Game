@@ -17,7 +17,11 @@ public class ProjectileManager {
 
     public void addProjectile(float x, float y, int count, GameObjectDirection direction) {
         ProjectileGameObject projectile = (ProjectileGameObject) abstractGameObjectFactory.createGameObject(GameObjectType.BULLET, direction);
-        projectile.increaseSpeed(1);
+        if (projectile.getGunner().equals(GameObjectType.PLAYER)) {
+            projectile.increaseSpeed(5);
+        }else{
+            projectile.increaseSpeed(1);
+        }
         projectile.setPosition(x+20,y+40);
         if (direction.equals(GameObjectDirection.RIGHT)) {
             projectile.setPosition(x + 60, y + 40);
@@ -38,7 +42,7 @@ public class ProjectileManager {
             }
 
             if (projectile.getGunner().equals(GameObjectType.PLAYER)){
-                for (CreatureGameObject creatureGameObject : creatureManager.getCreaturesinRange(projectile, 40)) {
+                for (CreatureGameObject creatureGameObject : creatureManager.getCreaturesinRange(projectile, 0,projectile.getGunner())) {
                     creatureManager.removeEnemy(creatureGameObject);
                     shot = true;
                 }
