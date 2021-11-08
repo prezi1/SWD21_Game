@@ -1,15 +1,15 @@
 package at.campus02.swd.game.gameobjects;
 
 import at.campus02.swd.game.AssetLoaderSingleton;
-import at.campus02.swd.game.Weapon.Weapon;
+import at.campus02.swd.game.Weapon.IWeapon;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.math.MathUtils;
 
 public class Robot extends CreatureGameObject {
 
-
-    public Robot(Weapon _weapon) {
-        weapon = _weapon;
+    public Robot(IWeapon _I_weapon) {
+        gameObjectType = GameObjectType.ENEMY;
+        IWeapon = _I_weapon;
         texture = AssetLoaderSingleton.getInstance().getRobotTexture();
         sprite = new Sprite(texture);
         sprite.setSize(120f, 120f);
@@ -18,6 +18,7 @@ public class Robot extends CreatureGameObject {
         health = 100; //percentage
     }
     public Robot() {
+        gameObjectType = GameObjectType.ENEMY;
         texture = AssetLoaderSingleton.getInstance().getRobotTexture();
         sprite = new Sprite(texture);
         sprite.setSize(120f, 120f);

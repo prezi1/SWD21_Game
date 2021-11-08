@@ -7,11 +7,14 @@ import com.badlogic.gdx.math.MathUtils;
 public class ProjectileGameObject extends GameObject{
 
     private GameObjectType gunner;
+    private float damage;
 
-    public ProjectileGameObject(GameObjectDirection direction) {
+    public ProjectileGameObject(GameObjectDirection direction, float damage) {
+        gameObjectType = GameObjectType.BULLET;
         texture  = AssetLoaderSingleton.getInstance().getBulletTexture();
         sprite = new Sprite(texture);
         sprite.setSize(20f, 20f);
+        this.damage = damage;
         //sprite.flip(true, false);
         speed = -100;
         gunner = GameObjectType.PLAYER;
@@ -21,6 +24,10 @@ public class ProjectileGameObject extends GameObject{
             gunner = GameObjectType.ENEMY;
         }
 
+    }
+
+    public float getDamage() {
+        return damage;
     }
 
     public GameObjectType getGunner() {

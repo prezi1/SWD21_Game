@@ -1,18 +1,15 @@
 package at.campus02.swd.game.gameobjects;
 
-import at.campus02.swd.game.AssetLoaderSingleton;
-import at.campus02.swd.game.Outputter.PositionOutput;
-import at.campus02.swd.game.Weapon.Weapon;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-import com.badlogic.gdx.math.MathUtils;
 
 public class GameObject implements IGameObject {
 
     protected Sprite sprite;
     protected float speed;
-    protected Texture texture = null;
+    protected Texture texture;
+    protected GameObjectType gameObjectType;
 
     @Override
     public void act(float delta) {
@@ -49,6 +46,10 @@ public class GameObject implements IGameObject {
         return sprite.getY();
     }
 
+    @Override
+    public GameObjectType getGameObjectType() {
+        return gameObjectType;
+    }
 
 
 }

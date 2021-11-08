@@ -1,13 +1,13 @@
 package at.campus02.swd.game.gameobjects;
 
-import at.campus02.swd.game.Weapon.Weapon;
+import at.campus02.swd.game.Weapon.IWeapon;
 
 public class RobotGameObjectFactory implements AbstractGameObjectFactory {
 
     @Override
-    public GameObject createGameObject(GameObjectType type, GameObjectDirection direction) {
+    public GameObject createGameObject(GameObjectType type, GameObjectDirection direction, float damage) {
         switch (type) {
-            case BULLET: return new ProjectileGameObject(direction);
+            case BULLET: return new ProjectileGameObject(direction, damage);
         }
         return null;
     }
@@ -20,10 +20,10 @@ public class RobotGameObjectFactory implements AbstractGameObjectFactory {
         return null;
     }
 
-    public CreatureGameObject createCreatureGameObject(GameObjectType type, Weapon weapon) {
+    public CreatureGameObject createCreatureGameObject(GameObjectType type, IWeapon IWeapon) {
         switch (type) {
-            case ENEMY: return new Robot(weapon);
-            case PLAYER: return new Ninja(Ninja.Type.MALE,weapon);
+            case ENEMY: return new Robot(IWeapon);
+            case PLAYER: return new Ninja(Ninja.Type.MALE, IWeapon);
         }
         return null;
     }

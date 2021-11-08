@@ -5,16 +5,16 @@ import at.campus02.swd.game.gameobjects.CreatureGameObject;
 import at.campus02.swd.game.gameobjects.GameObjectDirection;
 import at.campus02.swd.game.gameobjects.ProjectileManager;
 
-public class Gun implements Weapon{
+public class Gun implements IWeapon {
 
-    private final float damage = 100;
-    private final float range = 250;
+    private float damage;
     private ProjectileManager projectileManager;
     private GameObjectDirection direction;
 
-    public Gun(ProjectileManager projectileManager,GameObjectDirection direction) {
+    public Gun(ProjectileManager projectileManager,GameObjectDirection direction, float damage) {
         this.projectileManager = projectileManager;
         this.direction = direction;
+        this.damage = damage;
 
     }
 
@@ -22,14 +22,11 @@ public class Gun implements Weapon{
     public void execute(CreatureManager creatureManager, CreatureGameObject gameObject) {
 
         //create new projectile
-        this.projectileManager.addProjectile(gameObject.getX(), gameObject.getY(), 1,direction);
+        this.projectileManager.addProjectile(gameObject.getX(), gameObject.getY(), 1,direction, damage);
 
-        /*
-        for (CreatureGameObject creatureGameObject : creatureManager.getCreaturesinRange(player,range)){
-            creatureGameObject.damage(damage);
-        }
+    }
 
-         */
-
+    public float getDamage() {
+        return damage;
     }
 }

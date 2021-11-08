@@ -2,6 +2,10 @@ package at.campus02.swd.game.Strategies;
 
 import at.campus02.swd.game.gameobjects.CreatureManager;
 import at.campus02.swd.game.gameobjects.CreatureGameObject;
+import at.campus02.swd.game.gameobjects.GameObjectType;
+import at.campus02.swd.game.gameobjects.ProjectileGameObject;
+import com.badlogic.gdx.utils.Array;
+
 
 public class GameTypeStrategy implements ManagmentStrategy {
 
@@ -19,31 +23,54 @@ public class GameTypeStrategy implements ManagmentStrategy {
     public void act(CreatureManager creatureManager, float delta) {
 
         if (!this.gameover) {
+            boolean player_available = false;
+            int testindex=0;
+            Array<CreatureGameObject> removeCreatures = new Array<>();
             //Get enemy objects and move them
+
             for (CreatureGameObject creatureGameObject : creatureManager.getGameObjects()) {
 
                 if (creatureGameObject.getHealth() <= 0) {
-                    creatureManager.removeEnemy(creatureGameObject);
+                    System.out.println(creatureGameObject.getHealth() + creatureGameObject.getGameObjectType().toString());
+                    removeCreatures.add(creatureGameObject);
                     continue;
 
                 }
-                //GAME OVER
+
+                //GAME OVER when Enemy escapes
+
                 if (creatureGameObject.getX() < -50) {
-                    creatureManager.removeAllEnemies();
-                    this.gameover = true;
-                    break;
+                    removeCreatures.add(creatureGameObject);
+                   // creatureManager.removeAllEnemies();
+                   // this.gameover = true;
+                   // break;
                 }
 
 
-                if ((Math.floor(Math.random()*500))==1)
-                {
+                //Check if Player exists
+                if (creatureGameObject.getGameObjectType().equals(GameObjectType.PLAYER) && !player_available) {
+                    player_available = true;
+                }
+
+                //Shots from enemies
+                if ((Math.floor(Math.random() * 500)) == 1 && creatureGameObject.getGameObjectType().equals(GameObjectType.ENEMY)) {
                     creatureGameObject.getWeapon().execute(creatureManager, creatureGameObject);
                 }
-
                 creatureGameObject.act(delta);
+
             }
 
-            //enemyManager.removeEnemy(enemyManager.getEnemiesinRange(player, 75));
+            if (removeCreatures.size > 0){
+                creatureManager.removeEnemies(removeCreatures);
+            }
+
+
+            //GAME OVER when Player has been shot/removed
+            if (!player_available) {
+                System.out.println("Testindex: " + testindex);
+                creatureManager.removeAllEnemies();
+                this.gameover = true;
+            }
 
             //Add Enemys
             if (creatureManager.getGameObjects().size < maxGameObjects) {
@@ -57,7 +84,7 @@ public class GameTypeStrategy implements ManagmentStrategy {
     @Override
     public void init(CreatureManager creatureManager) {
         creatureManager.createEnemies(600, 800, 0, 380, maxGameObjects);
-
+        creatureManager.addPlayer(player);
     }
 
     @Override

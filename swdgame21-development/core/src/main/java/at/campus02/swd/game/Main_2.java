@@ -2,13 +2,11 @@ package at.campus02.swd.game;
 
 import at.campus02.swd.game.Strategies.GameTypeStrategy;
 import at.campus02.swd.game.Weapon.Gun;
-import at.campus02.swd.game.Weapon.Weapon;
+import at.campus02.swd.game.Weapon.IWeapon;
 import at.campus02.swd.game.commands.MoveDownCommand;
 import at.campus02.swd.game.commands.MoveUpCommand;
 import at.campus02.swd.game.gameobjects.*;
-import at.campus02.swd.game.observer.CatchLogger;
 import at.campus02.swd.game.observer.GameScore;
-import at.campus02.swd.game.observer.Observable;
 import com.badlogic.gdx.ApplicationAdapter;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
@@ -34,10 +32,7 @@ public class Main_2 extends ApplicationAdapter {
     private MoveDownCommand moveDownCommand;
     private MoveUpCommand moveUpCommand;
     private CreatureManager creatureManager;
-
-    private Observable observable;
     private GameScore gameScore;
-    private CatchLogger catchLogger;
     private BitmapFont font12;
     private BitmapFont font32;
     private BitmapFont font;
@@ -47,23 +42,18 @@ public class Main_2 extends ApplicationAdapter {
     @Override
     public void create() {
         AssetLoaderSingleton.getInstance().loadAssets();
-        observable = new Observable();
         gameScore = new GameScore();
-        catchLogger = new CatchLogger();
-        observable.registerObserver(gameScore);
-        observable.registerObserver(catchLogger);
-        gameObjectFactory = new RobotGameObjectFactory();
+        //gameObjectFactory = new RobotGameObjectFactory();
+        gameObjectFactory = new ZombieGameObjectFactory();
         projectileManager = new ProjectileManager(gameObjectFactory);
-        Weapon gun = new Gun(projectileManager,GameObjectDirection.RIGHT);
-
-        //gameObjectFactory = new ZombieGameObjectFactory();
-
+        IWeapon gun = new Gun(projectileManager, GameObjectDirection.RIGHT,100);
         batch = new SpriteBatch();
         player = gameObjectFactory.createCreatureGameObject(GameObjectType.PLAYER, gun);
         moveUpCommand = new MoveUpCommand(player, 10);
         moveDownCommand = new MoveDownCommand(player, 10);
         gameTypeStrategy = new GameTypeStrategy(player, 10);
-        creatureManager = new CreatureManager(gameObjectFactory, gameTypeStrategy, observable,projectileManager);
+        creatureManager = new CreatureManager(gameObjectFactory, gameTypeStrategy, projectileManager);
+        creatureManager.addObserver(gameScore);
         font = new BitmapFont();
 
     }
@@ -71,35 +61,27 @@ public class Main_2 extends ApplicationAdapter {
     private void act(float delta) {
         handleInputs(delta);
         creatureManager.act(delta);
-        /*
-        enemyManager.moveEnemy(delta);
-        enemyManager.deleteEnemies(player.getX(), player.getY(), 75);
-        if (!enemyManager.isGameover()) {
-            enemyManager.createEnemies(800, 800, 0, 380);
-        }
-
-         */
     }
 
     private void draw() {
         batch.begin();
         font.setColor(Color.BLACK);
         font.getData().setScale(2, 2);
-        font.draw(batch, Integer.toString(catchLogger.getCounter()), 750, 590);
+        font.draw(batch, "Score: " + Integer.toString(gameScore.getGamescore()), 600, 590);
+
+        font.draw(batch, Float.toString(player.getHealth()) + "%", 10, 590);
 
         for (CreatureGameObject creatureGameObject : creatureManager.getGameObjects()) {
             creatureGameObject.draw(batch);
         }
 
-        for (GameObject projectile : projectileManager.getProjectile()){
+        for (GameObject projectile : projectileManager.getProjectile()) {
             projectile.draw(batch);
         }
 
-        player.draw(batch);
-
-        if (gameTypeStrategy.GameOver()){
+        if (gameTypeStrategy.GameOver()) {
             font.setColor(Color.BLACK);
-            font.draw(batch, "GAME OVER!"+"\n"+"Press the Key R for a new Game!", 220, 350);
+            font.draw(batch, "GAME OVER!" + "\n" + "Press the Key R for a new Game!", 220, 350);
         }
 
         batch.end();
@@ -119,11 +101,11 @@ public class Main_2 extends ApplicationAdapter {
             moveUpCommand.setBoosterStrength(10);
         }
 
-        if (Gdx.input.isKeyJustPressed(Input.Keys.SPACE)){
-            player.getWeapon().execute(creatureManager,player);
+        if (Gdx.input.isKeyJustPressed(Input.Keys.SPACE)) {
+            player.getWeapon().execute(creatureManager, player);
         }
 
-        if (Gdx.input.isKeyJustPressed(Input.Keys.R)){
+        if (Gdx.input.isKeyJustPressed(Input.Keys.R) && gameTypeStrategy.GameOver()) {
             create();
         }
 
@@ -139,7 +121,7 @@ public class Main_2 extends ApplicationAdapter {
 
 
         if (timeincreasespeed > 5) {
-            creatureManager.increaseSpeed();
+            //creatureManager.increaseSpeed();
             timeincreasespeed = 0;
         }
 

@@ -15,14 +15,14 @@ public class ProjectileManager {
         projectiles = new Array<>();
     }
 
-    public void addProjectile(float x, float y, int count, GameObjectDirection direction) {
-        ProjectileGameObject projectile = (ProjectileGameObject) abstractGameObjectFactory.createGameObject(GameObjectType.BULLET, direction);
+    public void addProjectile(float x, float y, int count, GameObjectDirection direction,float damage) {
+        ProjectileGameObject projectile = (ProjectileGameObject) abstractGameObjectFactory.createGameObject(GameObjectType.BULLET, direction,damage);
         if (projectile.getGunner().equals(GameObjectType.PLAYER)) {
             projectile.increaseSpeed(5);
-        }else{
+        } else {
             projectile.increaseSpeed(1);
         }
-        projectile.setPosition(x+20,y+40);
+        projectile.setPosition(x + 20, y + 40);
         if (direction.equals(GameObjectDirection.RIGHT)) {
             projectile.setPosition(x + 60, y + 40);
         }
@@ -34,28 +34,21 @@ public class ProjectileManager {
     }
 
     public void act(float delta, CreatureManager creatureManager) {
-        boolean shot = false;
+
         for (ProjectileGameObject projectile : projectiles) {
 
             if (projectile.getX() > 800 || projectile.getX() < -50) {
-                projectiles.removeValue(projectile, true);
+                remove(projectile);
             }
 
-            if (projectile.getGunner().equals(GameObjectType.PLAYER)){
-                for (CreatureGameObject creatureGameObject : creatureManager.getCreaturesinRange(projectile, 0,projectile.getGunner())) {
-                    creatureManager.removeEnemy(creatureGameObject);
-                    shot = true;
-                }
-            }
-
-            if (shot) {
-                projectiles.removeValue(projectile, true);
-                shot = false;
+            for (CreatureGameObject creatureGameObject : creatureManager.getCreaturesinRange(projectile, -50, projectile.getGunner())) {
+                //creatureManager.removeEnemy(creatureGameObject);
+                creatureGameObject.damage(projectile.getDamage());
+                remove(projectile);
             }
 
             projectile.act(delta);
         }
-
 
     }
 
