@@ -12,11 +12,13 @@ public class GameTypeStrategy implements ManagmentStrategy {
     private CreatureGameObject player;
     private int maxGameObjects;
     private boolean gameover;
+    private Array<CreatureGameObject> removeCreatures;
 
     public GameTypeStrategy(CreatureGameObject player, int maxGameObjects) {
         this.player = player;
         this.maxGameObjects = maxGameObjects;
         this.gameover = false;
+        this.removeCreatures = new Array<>();
     }
 
     @Override
@@ -24,28 +26,21 @@ public class GameTypeStrategy implements ManagmentStrategy {
 
         if (!this.gameover) {
             boolean player_available = false;
-            int testindex=0;
-            Array<CreatureGameObject> removeCreatures = new Array<>();
+
             //Get enemy objects and move them
-
             for (CreatureGameObject creatureGameObject : creatureManager.getGameObjects()) {
-
                 if (creatureGameObject.getHealth() <= 0) {
-                    System.out.println(creatureGameObject.getHealth() + creatureGameObject.getGameObjectType().toString());
                     removeCreatures.add(creatureGameObject);
                     continue;
-
                 }
 
                 //GAME OVER when Enemy escapes
-
                 if (creatureGameObject.getX() < -50) {
                     removeCreatures.add(creatureGameObject);
-                   // creatureManager.removeAllEnemies();
-                   // this.gameover = true;
-                   // break;
+                    creatureManager.removeAllEnemies();
+                    this.gameover = true;
+                    break;
                 }
-
 
                 //Check if Player exists
                 if (creatureGameObject.getGameObjectType().equals(GameObjectType.PLAYER) && !player_available) {
@@ -60,19 +55,17 @@ public class GameTypeStrategy implements ManagmentStrategy {
 
             }
 
-            if (removeCreatures.size > 0){
-                creatureManager.removeEnemies(removeCreatures);
-            }
-
+            //Remove Creature Objects
+            creatureManager.removeCreatureObjects(removeCreatures);
+            removeCreatures.clear();
 
             //GAME OVER when Player has been shot/removed
             if (!player_available) {
-                System.out.println("Testindex: " + testindex);
                 creatureManager.removeAllEnemies();
                 this.gameover = true;
             }
 
-            //Add Enemys
+            //Create Creature Objects
             if (creatureManager.getGameObjects().size < maxGameObjects) {
                 int add = maxGameObjects - creatureManager.getGameObjects().size;
                 creatureManager.createEnemies(800, 800, 0, 380, add);

@@ -26,6 +26,7 @@ public class AssetLoaderSingleton {
         maleNinjaTexture = new Texture("male-ninja.png");
         femaleNinjaTexture = new Texture("female-ninja.png");
         bulletTexture = new Texture("bullet.png");
+        //bulletTexture = new Texture("dog.png");
     }
 
     public Texture getZombieTexture() {

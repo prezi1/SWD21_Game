@@ -1,9 +1,8 @@
 package at.campus02.swd.game.lwjgl3;
 
-import at.campus02.swd.game.Main_2;
+import at.campus02.swd.game.Main;
 import com.badlogic.gdx.backends.lwjgl3.Lwjgl3Application;
 import com.badlogic.gdx.backends.lwjgl3.Lwjgl3ApplicationConfiguration;
-import at.campus02.swd.game.Main;
 
 /** Launches the desktop (LWJGL3) application. */
 public class Lwjgl3Launcher {
@@ -12,7 +11,7 @@ public class Lwjgl3Launcher {
 	}
 
 	private static Lwjgl3Application createApplication() {
-		return new Lwjgl3Application(new Main_2(), getDefaultConfiguration());
+		return new Lwjgl3Application(new Main(), getDefaultConfiguration());
 	}
 
 	private static Lwjgl3ApplicationConfiguration getDefaultConfiguration() {

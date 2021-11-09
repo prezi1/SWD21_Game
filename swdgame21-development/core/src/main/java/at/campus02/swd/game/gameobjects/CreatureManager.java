@@ -33,7 +33,7 @@ public class CreatureManager {
 
     public void createEnemies(float x1, float x2, float y1, float y2, int count) {
         for (int i = 0; i < count; i++) {
-            CreatureGameObject creatureGameObject = abstractGameObjectFactory.createCreatureGameObject(GameObjectType.ENEMY, new Gun(this.projectileManager, GameObjectDirection.LEFT,20));
+            CreatureGameObject creatureGameObject = abstractGameObjectFactory.createCreatureGameObject(GameObjectType.ENEMY, new Gun(this.projectileManager, GameObjectDirection.LEFT, 20));
             creatureGameObject.increaseSpeed(this.speedfactor);
             creatureGameObject.setPosition(MathUtils.random(x1, x2), MathUtils.random(y1, y2));
             creatureGameObject.printPosition(new PositionOutput());
@@ -53,16 +53,15 @@ public class CreatureManager {
         enemy.setPosition(0, enemy.getY());
     }
 
-    public void removeEnemy(CreatureGameObject enemy) {
-        creatureGameObjects.removeValue(enemy, true);
-        if (enemy.getGameObjectType().equals(GameObjectType.ENEMY)) {
-            notifyObservers(enemy);
-        }
+    public void removeCreatureObject(CreatureGameObject creatureGameObject) {
+        creatureGameObjects.removeValue(creatureGameObject, true);
     }
 
-    public void removeEnemies(Array<CreatureGameObject> creatureGameObjects) {
-        for (CreatureGameObject creatureGameObject : creatureGameObjects){
-            this.removeEnemy(creatureGameObject);
+    public void removeCreatureObjects(Array<CreatureGameObject> creatureGameObjects) {
+        if (creatureGameObjects.notEmpty()) {
+            for (CreatureGameObject creatureGameObject : creatureGameObjects) {
+                this.removeCreatureObject(creatureGameObject);
+            }
         }
     }
 
@@ -78,7 +77,7 @@ public class CreatureManager {
             //##enemy Range
             if (type.equals(GameObjectType.PLAYER) && (creatureGameObject.getGameObjectType().equals(GameObjectType.ENEMY))) {
                 if ((creatureGameObject.getX() <= (gameObject.getX() + range) && creatureGameObject.getX() > 0 && creatureGameObject.getY() <= (gameObject.getY() + 20)
-                        && creatureGameObject.getY() >= (gameObject.getY() -100))) {
+                        && creatureGameObject.getY() >= (gameObject.getY() - 100))) {
                     creaturesInRange.add(creatureGameObject);
                 }
             }
@@ -93,6 +92,10 @@ public class CreatureManager {
         return creaturesInRange;
     }
 
+    public void damageCreature(CreatureGameObject creatureGameObject, float damage){
+        creatureGameObject.damage(damage);
+        notifyObservers(creatureGameObject);
+    }
 
     public void addObserver(GameObjectObserver gameObjectObserver) {
         gameObjectObservers.add(gameObjectObserver);
@@ -102,9 +105,9 @@ public class CreatureManager {
         gameObjectObservers.removeValue(gameObjectObserver, true);
     }
 
-    private void notifyObservers(GameObject gameObject) {
+    private void notifyObservers(CreatureGameObject creatureGameObject) {
         for (GameObjectObserver gameObjectObserver : gameObjectObservers) {
-            gameObjectObserver.update(gameObject);
+            gameObjectObserver.update(creatureGameObject);
         }
     }
 

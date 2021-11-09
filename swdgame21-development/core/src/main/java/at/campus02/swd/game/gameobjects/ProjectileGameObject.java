@@ -1,6 +1,7 @@
 package at.campus02.swd.game.gameobjects;
 
 import at.campus02.swd.game.AssetLoaderSingleton;
+import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.math.MathUtils;
 
@@ -21,6 +22,7 @@ public class ProjectileGameObject extends GameObject{
         if (direction.equals(GameObjectDirection.LEFT)) {
             speed *= -1;
             sprite.flip(true, false);
+            sprite.setColor(Color.CORAL);
             gunner = GameObjectType.ENEMY;
         }
 

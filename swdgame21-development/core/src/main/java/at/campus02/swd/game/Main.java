@@ -1,106 +1,143 @@
 package at.campus02.swd.game;
 
-import at.campus02.swd.game.Outputter.PositionOutput;
+import at.campus02.swd.game.Strategies.GameTypeStrategy;
+import at.campus02.swd.game.Weapon.Gun;
+import at.campus02.swd.game.Weapon.IWeapon;
 import at.campus02.swd.game.commands.MoveDownCommand;
 import at.campus02.swd.game.commands.MoveUpCommand;
 import at.campus02.swd.game.gameobjects.*;
+import at.campus02.swd.game.observer.GameScore;
+import at.campus02.swd.game.observer.PlayerHealth;
 import com.badlogic.gdx.ApplicationAdapter;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
+import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.GL20;
+import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.utils.Array;
 
-/** {@link com.badlogic.gdx.ApplicationListener} implementation shared by all platforms. */
+/**
+ * {@link com.badlogic.gdx.ApplicationListener} implementation shared by all platforms.
+ */
 public class Main extends ApplicationAdapter {
-	private SpriteBatch batch;
-	private final Array<CreatureGameObject> enemyGameObjects = new Array<>();
-	private final float updatesPerSecond = 60;
-	private final float logicFrameTime = 1 / updatesPerSecond;
-	private float deltaAccumulator = 0;
-	private AbstractGameObjectFactory gameObjectFactory;
+    private SpriteBatch batch;
+    private final Array<CreatureGameObject> enemyGameObjects = new Array<>();
+    private final float updatesPerSecond = 60;
+    private final float logicFrameTime = 1 / updatesPerSecond;
+    private float deltaAccumulator = 0;
+    private float timeincreasespeed = 0;
+    private AbstractGameObjectFactory gameObjectFactory;
 
-	private CreatureGameObject player;
-	private MoveDownCommand moveDownCommand;
-	private MoveUpCommand moveUpCommand;
+    private CreatureGameObject player;
+    private MoveDownCommand moveDownCommand;
+    private MoveUpCommand moveUpCommand;
+    private CreatureManager creatureManager;
+    private GameScore gameScore;
+    private PlayerHealth playerHealth;
+    private BitmapFont font12;
+    private BitmapFont font32;
+    private BitmapFont font;
+    private GameTypeStrategy gameTypeStrategy;
+    private ProjectileManager projectileManager;
 
-	@Override
-	public void create() {
-		AssetLoaderSingleton.getInstance().loadAssets();
-		gameObjectFactory = new RobotGameObjectFactory();
-		//gameObjectFactory = new ZombieGameObjectFactory();
-		batch = new SpriteBatch();
-		player = gameObjectFactory.createCreatureGameObject(GameObjectType.PLAYER);
-		moveUpCommand = new MoveUpCommand(player, 10);
-		moveDownCommand = new MoveDownCommand(player, 10);
+    @Override
+    public void create() {
+        AssetLoaderSingleton.getInstance().loadAssets();
 
-		for(int i = 0; i < 10; i++) {
-			CreatureGameObject creatureGameObject = gameObjectFactory.createCreatureGameObject(GameObjectType.ENEMY);
-			creatureGameObject.setPosition(MathUtils.random(800), MathUtils.random(600-120));
-			enemyGameObjects.add(creatureGameObject);
-		}
-	}
+        //gameObjectFactory = new RobotGameObjectFactory();
+        gameObjectFactory = new ZombieGameObjectFactory();
+        projectileManager = new ProjectileManager(gameObjectFactory);
+        IWeapon gun = new Gun(projectileManager, GameObjectDirection.RIGHT,100);
+        batch = new SpriteBatch();
+        gameScore = new GameScore(batch);
 
-	private void act(float delta) {
-		handleInputs(delta);
-		Array<CreatureGameObject> toRemove = new Array<>();
-		for(CreatureGameObject creatureGameObject : enemyGameObjects) {
-			creatureGameObject.act(delta);
-			if(creatureGameObject.getX() < 0) {
-				toRemove.add(creatureGameObject);
-			}
-		}
-		enemyGameObjects.removeAll(toRemove, true);
-		for(int i = 0; i < toRemove.size; i++) {
-			CreatureGameObject enemy = gameObjectFactory.createCreatureGameObject(GameObjectType.ENEMY);
-			enemy.setPosition(800, MathUtils.random(0, 600-120));
-			enemy.printPosition(new PositionOutput());
-			enemyGameObjects.add(enemy);
-		}
-		toRemove.clear();
-	}
+        player = gameObjectFactory.createCreatureGameObject(GameObjectType.PLAYER, gun);
+        playerHealth = new PlayerHealth(batch, player.getHealth());
+        moveUpCommand = new MoveUpCommand(player, 10);
+        moveDownCommand = new MoveDownCommand(player, 10);
+        gameTypeStrategy = new GameTypeStrategy(player, 10);
+        creatureManager = new CreatureManager(gameObjectFactory, gameTypeStrategy, projectileManager);
+        creatureManager.addObserver(gameScore);
+        creatureManager.addObserver(playerHealth);
+        font = new BitmapFont();
 
-	private void draw() {
-		batch.begin();
-		for(CreatureGameObject creatureGameObject : enemyGameObjects) {
-			creatureGameObject.draw(batch);
-		}
-		player.draw(batch);
-		batch.end();
-	}
+    }
 
-	private void handleInputs(float delta) {
-		if(Gdx.input.isKeyPressed(Input.Keys.S)) {
-			moveDownCommand.execute();
-		}
-		if(Gdx.input.isKeyPressed(Input.Keys.W)) {
-			moveUpCommand.execute();
-		}
+    private void act(float delta) {
+        handleInputs(delta);
+        creatureManager.act(delta);
+    }
 
-		if(Gdx.input.isKeyJustPressed(Input.Keys.CONTROL_LEFT)){
-			moveDownCommand.setBoosterStrength(10);
-			moveUpCommand.setBoosterStrength(10);
-		}
+    private void draw() {
+        batch.begin();
+        playerHealth.display();
+        gameScore.display();
 
-	}
+        for (CreatureGameObject creatureGameObject : creatureManager.getGameObjects()) {
+            creatureGameObject.draw(batch);
+        }
 
-	@Override
-	public void render() {
-		Gdx.gl.glClearColor(1, 1, 1, 1);
-		Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
-		float delta = Gdx.graphics.getDeltaTime();
-		deltaAccumulator += delta;
-		while(deltaAccumulator > logicFrameTime) {
-			deltaAccumulator -= logicFrameTime;
-			act(logicFrameTime);
-		}
-		draw();
-	}
+        for (GameObject projectile : projectileManager.getProjectile()) {
+            projectile.draw(batch);
+        }
 
-	@Override
-	public void dispose() {
-		batch.dispose();
-		AssetLoaderSingleton.getInstance().dispose();
-	}
+        if (gameTypeStrategy.GameOver()) {
+            font.setColor(Color.BLACK);
+            font.draw(batch, "GAME OVER!" + "\n" + "Press the Key R for a new Game!", 220, 350);
+        }
+
+        batch.end();
+
+    }
+
+    private void handleInputs(float delta) {
+        if (Gdx.input.isKeyPressed(Input.Keys.S)) {
+            moveDownCommand.execute();
+        }
+        if (Gdx.input.isKeyPressed(Input.Keys.W)) {
+            moveUpCommand.execute();
+        }
+
+        if (Gdx.input.isKeyJustPressed(Input.Keys.CONTROL_LEFT)) {
+            moveDownCommand.setBoosterStrength(10);
+            moveUpCommand.setBoosterStrength(10);
+        }
+
+        if (Gdx.input.isKeyJustPressed(Input.Keys.SPACE)) {
+            player.getWeapon().execute(creatureManager, player);
+        }
+
+        if (Gdx.input.isKeyJustPressed(Input.Keys.R) && gameTypeStrategy.GameOver()) {
+            create();
+        }
+
+    }
+
+    @Override
+    public void render() {
+        Gdx.gl.glClearColor(1, 1, 1, 1);
+        Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
+        float delta = Gdx.graphics.getDeltaTime();
+        deltaAccumulator += delta;
+        timeincreasespeed += delta;
+
+
+        if (timeincreasespeed > 5) {
+            //creatureManager.increaseSpeed();
+            timeincreasespeed = 0;
+        }
+
+        while (deltaAccumulator > logicFrameTime) {
+            deltaAccumulator -= logicFrameTime;
+            act(logicFrameTime);
+        }
+        draw();
+   }
+
+    @Override
+    public void dispose() {
+        batch.dispose();
+        AssetLoaderSingleton.getInstance().dispose();
+    }
 }

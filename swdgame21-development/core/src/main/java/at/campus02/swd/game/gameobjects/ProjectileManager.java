@@ -1,8 +1,5 @@
 package at.campus02.swd.game.gameobjects;
 
-import at.campus02.swd.game.Outputter.PositionOutput;
-import com.badlogic.gdx.Game;
-import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.utils.Array;
 
 public class ProjectileManager {
@@ -43,7 +40,8 @@ public class ProjectileManager {
 
             for (CreatureGameObject creatureGameObject : creatureManager.getCreaturesinRange(projectile, -50, projectile.getGunner())) {
                 //creatureManager.removeEnemy(creatureGameObject);
-                creatureGameObject.damage(projectile.getDamage());
+                //creatureGameObject.damage(projectile.getDamage());
+                creatureManager.damageCreature(creatureGameObject,projectile.getDamage());
                 remove(projectile);
             }
 
