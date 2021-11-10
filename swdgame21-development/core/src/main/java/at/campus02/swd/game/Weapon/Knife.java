@@ -2,6 +2,7 @@ package at.campus02.swd.game.Weapon;
 
 import at.campus02.swd.game.gameobjects.CreatureManager;
 import at.campus02.swd.game.gameobjects.CreatureGameObject;
+import at.campus02.swd.game.gameobjects.GameObjectType;
 
 public class Knife implements IWeapon {
 
@@ -11,6 +12,8 @@ public class Knife implements IWeapon {
     @Override
     public void execute(CreatureManager creatureManager, CreatureGameObject player) {
 
-
+        for (CreatureGameObject creatureGameObject:creatureManager.getCreaturesinRange(player,range, GameObjectType.PLAYER)){
+            creatureGameObject.damage(damage);
+        }
     }
 }

@@ -1,9 +1,6 @@
 package at.campus02.swd.game.Strategies;
 
-import at.campus02.swd.game.gameobjects.CreatureManager;
-import at.campus02.swd.game.gameobjects.CreatureGameObject;
-import at.campus02.swd.game.gameobjects.GameObjectType;
-import at.campus02.swd.game.gameobjects.ProjectileGameObject;
+import at.campus02.swd.game.gameobjects.*;
 import com.badlogic.gdx.utils.Array;
 
 
@@ -12,12 +9,14 @@ public class GameTypeStrategy implements ManagmentStrategy {
     private CreatureGameObject player;
     private int maxGameObjects;
     private boolean gameover;
+    private boolean enemyescaped;
     private Array<CreatureGameObject> removeCreatures;
 
     public GameTypeStrategy(CreatureGameObject player, int maxGameObjects) {
         this.player = player;
         this.maxGameObjects = maxGameObjects;
         this.gameover = false;
+        this.enemyescaped = false;
         this.removeCreatures = new Array<>();
     }
 
@@ -36,9 +35,7 @@ public class GameTypeStrategy implements ManagmentStrategy {
 
                 //GAME OVER when Enemy escapes
                 if (creatureGameObject.getX() < -50) {
-                    removeCreatures.add(creatureGameObject);
-                    creatureManager.removeAllEnemies();
-                    this.gameover = true;
+                    enemyescaped = true;
                     break;
                 }
 
@@ -60,9 +57,11 @@ public class GameTypeStrategy implements ManagmentStrategy {
             removeCreatures.clear();
 
             //GAME OVER when Player has been shot/removed
-            if (!player_available) {
+            if (!player_available || enemyescaped && !gameover) {
                 creatureManager.removeAllEnemies();
+                ProjectileManager.getInstance().removeAllProjectiles();
                 this.gameover = true;
+
             }
 
             //Create Creature Objects
@@ -78,6 +77,7 @@ public class GameTypeStrategy implements ManagmentStrategy {
     public void init(CreatureManager creatureManager) {
         creatureManager.createEnemies(600, 800, 0, 380, maxGameObjects);
         creatureManager.addPlayer(player);
+        this.gameover = false;
     }
 
     @Override

@@ -11,7 +11,7 @@ public class Gun implements IWeapon {
     private ProjectileManager projectileManager;
     private GameObjectDirection direction;
 
-    public Gun(ProjectileManager projectileManager,GameObjectDirection direction, float damage) {
+    public Gun(ProjectileManager projectileManager, GameObjectDirection direction, float damage) {
         this.projectileManager = projectileManager;
         this.direction = direction;
         this.damage = damage;
@@ -22,7 +22,7 @@ public class Gun implements IWeapon {
     public void execute(CreatureManager creatureManager, CreatureGameObject gameObject) {
 
         //create new projectile
-        this.projectileManager.addProjectile(gameObject.getX(), gameObject.getY(), 1,direction, damage);
+        this.projectileManager.addProjectile(gameObject.getX(), gameObject.getY(), 1, direction, damage, creatureManager.getAbstractGameObjectFactory());
 
     }
 

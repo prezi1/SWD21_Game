@@ -1,6 +1,7 @@
 package at.campus02.swd.game.observer;
 
 import at.campus02.swd.game.gameobjects.CreatureGameObject;
+import at.campus02.swd.game.gameobjects.CreatureManager;
 import at.campus02.swd.game.gameobjects.GameObject;
 import at.campus02.swd.game.gameobjects.GameObjectType;
 import com.badlogic.gdx.graphics.Color;
@@ -13,8 +14,11 @@ public class PlayerHealth implements GameObjectObserver{
     private float health;
     private SpriteBatch batch;
     private BitmapFont font;
+    private CreatureManager creatureManager;
 
-    public PlayerHealth(SpriteBatch batch, float initPlayerHealth) {
+    public PlayerHealth(CreatureManager creatureManager, SpriteBatch batch, float initPlayerHealth) {
+        this.creatureManager = creatureManager;
+        creatureManager.addObserver(this);
         this.batch = batch;
         this.health = initPlayerHealth;
         font = new BitmapFont();

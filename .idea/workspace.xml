@@ -5,18 +5,16 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="a59d6f05-ed43-45c3-bf1b-c232caa47205" name="Default Changelist" comment="Neueste Game-Version SWD 21">
-      <change afterPath="$PROJECT_DIR$/swdgame21-development/core/src/main/java/at/campus02/swd/game/observer/PlayerHealth.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/swdgame21-development/core/src/main/java/at/campus02/swd/game/AssetLoaderSingleton.java" beforeDir="false" afterPath="$PROJECT_DIR$/swdgame21-development/core/src/main/java/at/campus02/swd/game/AssetLoaderSingleton.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/swdgame21-development/core/src/main/java/at/campus02/swd/game/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/swdgame21-development/core/src/main/java/at/campus02/swd/game/Main.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/swdgame21-development/core/src/main/java/at/campus02/swd/game/Main_2.java" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/swdgame21-development/core/src/main/java/at/campus02/swd/game/Strategies/GameTypeStrategy.java" beforeDir="false" afterPath="$PROJECT_DIR$/swdgame21-development/core/src/main/java/at/campus02/swd/game/Strategies/GameTypeStrategy.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/swdgame21-development/core/src/main/java/at/campus02/swd/game/Weapon/Gun.java" beforeDir="false" afterPath="$PROJECT_DIR$/swdgame21-development/core/src/main/java/at/campus02/swd/game/Weapon/Gun.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/swdgame21-development/core/src/main/java/at/campus02/swd/game/Weapon/Knife.java" beforeDir="false" afterPath="$PROJECT_DIR$/swdgame21-development/core/src/main/java/at/campus02/swd/game/Weapon/Knife.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/swdgame21-development/core/src/main/java/at/campus02/swd/game/Weapon/Sword.java" beforeDir="false" afterPath="$PROJECT_DIR$/swdgame21-development/core/src/main/java/at/campus02/swd/game/Weapon/Sword.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/swdgame21-development/core/src/main/java/at/campus02/swd/game/gameobjects/CreatureManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/swdgame21-development/core/src/main/java/at/campus02/swd/game/gameobjects/CreatureManager.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/swdgame21-development/core/src/main/java/at/campus02/swd/game/gameobjects/ProjectileGameObject.java" beforeDir="false" afterPath="$PROJECT_DIR$/swdgame21-development/core/src/main/java/at/campus02/swd/game/gameobjects/ProjectileGameObject.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/swdgame21-development/core/src/main/java/at/campus02/swd/game/gameobjects/ProjectileManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/swdgame21-development/core/src/main/java/at/campus02/swd/game/gameobjects/ProjectileManager.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/swdgame21-development/core/src/main/java/at/campus02/swd/game/observer/GameObjectObserver.java" beforeDir="false" afterPath="$PROJECT_DIR$/swdgame21-development/core/src/main/java/at/campus02/swd/game/observer/GameObjectObserver.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/swdgame21-development/core/src/main/java/at/campus02/swd/game/observer/GameScore.java" beforeDir="false" afterPath="$PROJECT_DIR$/swdgame21-development/core/src/main/java/at/campus02/swd/game/observer/GameScore.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/swdgame21-development/lwjgl3/src/main/java/at/campus02/swd/game/lwjgl3/Lwjgl3Launcher.java" beforeDir="false" afterPath="$PROJECT_DIR$/swdgame21-development/lwjgl3/src/main/java/at/campus02/swd/game/lwjgl3/Lwjgl3Launcher.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/swdgame21-development/core/src/main/java/at/campus02/swd/game/observer/PlayerHealth.java" beforeDir="false" afterPath="$PROJECT_DIR$/swdgame21-development/core/src/main/java/at/campus02/swd/game/observer/PlayerHealth.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -170,7 +168,9 @@
       <workItem from="1636390040478" duration="14540000" />
       <workItem from="1636440655610" duration="844000" />
       <workItem from="1636448319762" duration="724000" />
-      <workItem from="1636485784755" duration="5211000" />
+      <workItem from="1636485784755" duration="5228000" />
+      <workItem from="1636546576024" duration="739000" />
+      <workItem from="1636553285401" duration="13191000" />
     </task>
     <task id="LOCAL-00001" summary="Neue version">
       <created>1634759430042</created>
@@ -228,7 +228,14 @@
       <option name="project" value="LOCAL" />
       <updated>1636407565480</updated>
     </task>
-    <option name="localTasksCounter" value="9" />
+    <task id="LOCAL-00009" summary="Neueste Game-Version SWD 21">
+      <created>1636493712408</created>
+      <option name="number" value="00009" />
+      <option name="presentableId" value="LOCAL-00009" />
+      <option name="project" value="LOCAL" />
+      <updated>1636493712408</updated>
+    </task>
+    <option name="localTasksCounter" value="10" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -252,15 +259,6 @@
     <option name="LAST_COMMIT_MESSAGE" value="Neueste Game-Version SWD 21" />
   </component>
   <component name="XDebuggerManager">
-    <breakpoint-manager>
-      <breakpoints>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/swdgame21-development/core/src/main/java/at/campus02/swd/game/gameobjects/ProjectileManager.java</url>
-          <line>43</line>
-          <option name="timeStamp" value="2" />
-        </line-breakpoint>
-      </breakpoints>
-    </breakpoint-manager>
     <pin-to-top-manager>
       <pinned-members>
         <PinnedItemInfo parentTag="com.badlogic.gdx.utils.Array" memberName="items" />

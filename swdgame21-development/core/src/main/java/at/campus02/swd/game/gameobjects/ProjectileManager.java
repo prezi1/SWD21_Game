@@ -1,19 +1,24 @@
 package at.campus02.swd.game.gameobjects;
-
 import com.badlogic.gdx.utils.Array;
 
 public class ProjectileManager {
+    private static ProjectileManager instance;
 
     private Array<ProjectileGameObject> projectiles;
-    private AbstractGameObjectFactory abstractGameObjectFactory;
 
-    public ProjectileManager(AbstractGameObjectFactory abstractGameObjectFactory) {
-        this.abstractGameObjectFactory = abstractGameObjectFactory;
+    private ProjectileManager() {
         projectiles = new Array<>();
     }
 
-    public void addProjectile(float x, float y, int count, GameObjectDirection direction,float damage) {
-        ProjectileGameObject projectile = (ProjectileGameObject) abstractGameObjectFactory.createGameObject(GameObjectType.BULLET, direction,damage);
+    public static ProjectileManager getInstance() {
+        if (instance == null) {
+            instance = new ProjectileManager();
+        }
+        return instance;
+    }
+
+    public void addProjectile(float x, float y, int count, GameObjectDirection direction, float damage, AbstractGameObjectFactory abstractGameObjectFactory) {
+        ProjectileGameObject projectile = (ProjectileGameObject) abstractGameObjectFactory.createGameObject(GameObjectType.BULLET, direction, damage);
         if (projectile.getGunner().equals(GameObjectType.PLAYER)) {
             projectile.increaseSpeed(5);
         } else {
@@ -30,6 +35,10 @@ public class ProjectileManager {
         projectiles.removeValue(projectile, true);
     }
 
+    public void removeAllProjectiles() {
+        projectiles.clear();
+    }
+
     public void act(float delta, CreatureManager creatureManager) {
 
         for (ProjectileGameObject projectile : projectiles) {
@@ -39,9 +48,7 @@ public class ProjectileManager {
             }
 
             for (CreatureGameObject creatureGameObject : creatureManager.getCreaturesinRange(projectile, -50, projectile.getGunner())) {
-                //creatureManager.removeEnemy(creatureGameObject);
-                //creatureGameObject.damage(projectile.getDamage());
-                creatureManager.damageCreature(creatureGameObject,projectile.getDamage());
+                creatureManager.damageCreature(creatureGameObject, projectile.getDamage());
                 remove(projectile);
             }
 
